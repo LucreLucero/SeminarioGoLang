@@ -70,7 +70,7 @@ func createSchema(db *sqlx.DB) error {
 
 	//or, you can use MustExec, which panics on error
 	insertCandy := `INSERT INTO candies (text) VALUES (?)`
-	s := fmt.Sprintf("Candy number %v", time.Now().Nanosecond())
+	s := fmt.Sprintf("Candy number %v", time.Now().Nanosecond()) //preguntar las lineas dentro
 	db.MustExec(insertCandy, s)
 	return nil
 }

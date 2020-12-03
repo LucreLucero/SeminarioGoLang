@@ -1,5 +1,7 @@
 package candyshop //el package siempre es el nombre de la carpeta
 import (
+	"fmt"
+
 	"github.com/LucreLucero/SeminarioGoLang/internal/config"
 
 	"github.com/jmoiron/sqlx"
@@ -8,7 +10,7 @@ import (
 //Candy
 type Candy struct {
 	ID   int64
-	Text string
+	Text string //Name
 }
 
 //Service
@@ -33,23 +35,49 @@ func New(db *sqlx.DB, c *config.Config) (Service, error) {
 
 //Add
 func (s service) AddCandy(c Candy) error {
-	query := "INSERT INTO candies (name) VALUES (?)"
-	_, err := s.db.Exec(query, c.)
+	query := "INSERT INTO candies (text) VALUES (?)"
+	_, err := s.db.Exec(query, c.Text)
+	if err != nil {
+		fmt.Println(err.Error()) //imprimo el error --esta bien asi o debe ser un panic(err)
+		return err
+	}
 	return nil
 }
 
-//Find one
-func (s service) FindByID(ID int) *Service { //tengo que nombrarlos en las funciones
-	return nil
+//Find one by id
+func (s service) FindByID(ID int) *Candy { //tengo que nombrarlos en las funciones
+	var candy []*Candy                           //
+	query := "SELECT * FROM candies WHERE id =?" //consulta a la db para que me traiga un objeto por id
+	if err := s.db.Select(&candy, query, ID); err != nil {
+		fmt.Println(err.Error()) //imprimo el error --esta bien asi o debe ser un panic(err)
+	}
+	return candy[0] //retorno el primer valor obtenido
 }
 
 //FindAll
 func (s service) FindAll() []*Candy {
 	var list []*Candy
 	if err := s.db.Select(&list, "SELECT * FROM candies"); err != nil {
-		panic(err)
+		panic(err) //se puede usar siempre o cuando es mejor hacerlo ?
 	}
 	return list
 }
-func (s service) Update(int, Candy c) {}
-func (s service) Delete(int)          {}
+
+//Update
+func (s service) Update(ID int, c Candy) {
+	query := "UPDATE candies SET text=?  WHERE id = ?"
+	_, err := s.db.Exec(query, c.Text, ID)
+	if err != nil {
+		fmt.Println(err.Error()) //imprimo el error --esta bien asi o debe ser un panic(err)
+	}
+}
+
+//Delete
+func (s service) Delete(ID int) {
+	query := "DELETE FROM candies WHERE id = ?"
+	_, err := s.db.Exec(query, ID)
+	if err != nil {
+		fmt.Println(err.Error()) //imprimo el error --esta bien asi o debe ser un panic(err)
+	}
+
+}

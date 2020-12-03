@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10/translations/id"
 )
 
 //HTTPService
@@ -38,7 +39,7 @@ func makeEnpoints(s Service) []*endpoint {
 	list = append(list, &endpoint{ //One
 		method:   "GET",
 		path:     "/candy",
-		function: getOne(s),
+		function: getCandy(s),
 	})
 	list = append(list, &endpoint{ //Add
 		method:   "POST",
@@ -68,15 +69,21 @@ func getAll(s Service) gin.HandlerFunc {
 }
 
 //GET one
-func getOne(s Service) gin.HandlerFunc {
+func getCandy(s Service) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		
+		
+		
+		c.JSON(http.StatusOK, gin.H{
+			"candies": s.FindByID(id),
+		}
 	}
 }
 
 //ADD
 func addCandy(s Service) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		
+
 	}
 }
 
