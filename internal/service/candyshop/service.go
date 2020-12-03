@@ -7,13 +7,13 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-//Candy
+//Candy...
 type Candy struct {
 	ID   int64
 	Text string //Name
 }
 
-//Service
+//Service...
 type Service interface { //para que una estructura implemente una interfaz
 	AddCandy(Candy) error //puedo usarlos como anonimos
 	FindByID(int) *Candy
@@ -28,12 +28,12 @@ type service struct { //no lo voy a exportar --esta en minuscula
 	config *config.Config
 }
 
-//New
+//New...
 func New(db *sqlx.DB, c *config.Config) (Service, error) {
 	return service{db, c}, nil
 }
 
-//Add
+//Add one candy ...
 func (s service) AddCandy(c Candy) error {
 	query := "INSERT INTO candies (text) VALUES (?)"
 	_, err := s.db.Exec(query, c.Text)
@@ -44,7 +44,7 @@ func (s service) AddCandy(c Candy) error {
 	return nil
 }
 
-//Find one by id
+//Find one candy by id...
 func (s service) FindByID(ID int) *Candy { //tengo que nombrarlos en las funciones
 	var candy []*Candy                           //
 	query := "SELECT * FROM candies WHERE id =?" //consulta a la db para que me traiga un objeto por id
@@ -54,8 +54,8 @@ func (s service) FindByID(ID int) *Candy { //tengo que nombrarlos en las funcion
 	return candy[0] //retorno el primer valor obtenido
 }
 
-//FindAll
-func (s service) FindAll() []*Candy {
+//FindAll the candies...
+func (s service) FindAll() []*Candy { // en base a la clase
 	var list []*Candy
 	if err := s.db.Select(&list, "SELECT * FROM candies"); err != nil {
 		panic(err) //se puede usar siempre o cuando es mejor hacerlo ?
@@ -63,21 +63,21 @@ func (s service) FindAll() []*Candy {
 	return list
 }
 
-//Update
+//Update a candy...
 func (s service) Update(ID int, c Candy) {
 	query := "UPDATE candies SET text=?  WHERE id = ?"
 	_, err := s.db.Exec(query, c.Text, ID)
 	if err != nil {
-		fmt.Println(err.Error()) //imprimo el error --esta bien asi o debe ser un panic(err)
+		fmt.Println(err.Error()) //imprimo el error --en que se diferecia el panic(err) del error comun ??
 	}
 }
 
-//Delete
+//Delete a candy...
 func (s service) Delete(ID int) {
 	query := "DELETE FROM candies WHERE id = ?"
 	_, err := s.db.Exec(query, ID)
 	if err != nil {
-		fmt.Println(err.Error()) //imprimo el error --esta bien asi o debe ser un panic(err)
+		fmt.Println(err.Error()) //imprimo el error --en que se diferecia el panic(err) del error comun ??
 	}
 
 }
