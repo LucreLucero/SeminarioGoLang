@@ -8,7 +8,7 @@ import (
 
 //Db config
 type DbConfig struct {
-	Type   string `yaml:"type"` //toma la decision de como levantar la db
+	Type   string `yaml:"type"`   //toma la decision de como levantar la db
 	Driver string `yaml:"driver"` //driver para levantar mi database
 	Conn   string `yaml:"conn"`   //connection string
 }

@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/LucreLucero/SeminarioGoLang/apiREST/internal/config"
-	"github.com/LucreLucero/SeminarioGoLang/apiREST/internal/database"
-	"github.com/LucreLucero/SeminarioGoLang/apiREST/internal/service/candyshop"
+	"github.com/LucreLucero/SeminarioGoLang/internal/config"
+	"github.com/LucreLucero/SeminarioGoLang/internal/database"
+	"github.com/LucreLucero/SeminarioGoLang/internal/service/candyshop"
 
 	"github.com/jmoiron/sqlx"
 )

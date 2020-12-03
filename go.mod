@@ -1,4 +1,4 @@
-module SeminarioGoLang/apiREST
+module github.com/LucreLucero/SeminarioGoLang
 
 go 1.15
 

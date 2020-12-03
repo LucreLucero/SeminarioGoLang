@@ -1,8 +1,9 @@
 package database
 
 import (
-	"SeminarioGoLang/apiREST/internal/config"
 	"errors"
+
+	"github.com/LucreLucero/SeminarioGoLang/internal/config"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/mattn/go-sqlite3" //adding sqlite support
