@@ -9,4 +9,4 @@ ___________
 
 > go run cmd/candyshop/candysrv.go -config ./config/config.yaml
 
-3. 
+3. Navegar en forma local por el puerto 8080 

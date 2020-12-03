@@ -9,6 +9,7 @@ import (
 	"github.com/LucreLucero/SeminarioGoLang/internal/config"
 	"github.com/LucreLucero/SeminarioGoLang/internal/database"
 	"github.com/LucreLucero/SeminarioGoLang/internal/service/candyshop"
+	"github.com/gin-gonic/gin"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -20,17 +21,23 @@ func main() {
 	//fmt.Println(cfg.Version)
 
 	db, err := database.NewDataBase(cfg) //es mucho mas facil de leer - es la mejor p
+	defer db.Close()
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 
-	if err := createSchema(db); err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
+	//if err := createSchema(db); err != nil {
+	//	fmt.Println(err.Error())
+	//	os.Exit(1)
+	//}
 
 	service, _ := candyshop.New(db, cfg) //servicio --inyectar al servicio una config
+	httpService := candyshop.NewHTTPTransport(service)
+
+	r := gin.Default()
+	httpService.Register(r)
+	r.Run()
 
 	for _, c := range service.FindAll() {
 		fmt.Println(c)

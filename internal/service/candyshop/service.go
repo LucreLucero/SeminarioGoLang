@@ -14,8 +14,11 @@ type Candy struct {
 //Service
 type Service interface { //para que una estructura implemente una interfaz
 	AddCandy(Candy) error //puedo usarlos como anonimos
-	FindByID(int) *Service
+	FindByID(int) *Candy
 	FindAll() []*Candy
+
+	Update(int, Candy)
+	Delete(int)
 }
 
 type service struct { //no lo voy a exportar --esta en minuscula
@@ -28,13 +31,19 @@ func New(db *sqlx.DB, c *config.Config) (Service, error) {
 	return service{db, c}, nil
 }
 
+//Add
 func (s service) AddCandy(c Candy) error {
+	query := "INSERT INTO candies (name) VALUES (?)"
+	_, err := s.db.Exec(query, c.)
 	return nil
 }
 
+//Find one
 func (s service) FindByID(ID int) *Service { //tengo que nombrarlos en las funciones
 	return nil
 }
+
+//FindAll
 func (s service) FindAll() []*Candy {
 	var list []*Candy
 	if err := s.db.Select(&list, "SELECT * FROM candies"); err != nil {
@@ -42,3 +51,5 @@ func (s service) FindAll() []*Candy {
 	}
 	return list
 }
+func (s service) Update(int, Candy c) {}
+func (s service) Delete(int)          {}
