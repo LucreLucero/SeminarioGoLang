@@ -23,21 +23,21 @@ ___________
 
 - Con body {"Text": lollipop}
 
-> http://localhost:8080/candy
+> http://localhost:8080/candy/
 
 ### PUT : actualizar un caramelo
 
 - Con body {"Text": Caramel cookie}
 
-> http://localhost:8080/candy
+> http://localhost:8080/candy/{id}
 
 ### DELETE : eliminar un caramelo
 
-> http://localhost:8080/candy
+> http://localhost:8080/candy/{id}
+
 
 ## Consideraciones
 - Realice la prueba en forma local en Chrome
 - Para realizar el trabajo utilice Windows 7 y al ejecutar consola aparecia una advertencia, presionando continuar funciona correctamente
-
 
 
