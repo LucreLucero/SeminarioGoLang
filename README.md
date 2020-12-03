@@ -1,11 +1,11 @@
-# Seminario GoLang 2020
+## Seminario GoLang 2020
 ___________
-## apiREST - Lucero Lucrecia
+## Lucero Lucrecia - Sede Tandil
 
-### Pasos a seguir para nuestra api
+### Pasos a seguir para ejecutar nuestra api
 
 1. Clonar el repositorio en nuestro GOPATH
-2. Utilizar la consola con 
+2. Utilizar la consola con:
 
 > go run cmd/candyshop/candysrv.go -config ./config/config.yaml
 
@@ -23,16 +23,21 @@ ___________
 
 - Con body {"Text": lollipop}
 
-> http://localhost:8080/candy
+> http://localhost:8080/candy/
 
 ### PUT : actualizar un caramelo
 
 - Con body {"Text": Caramel cookie}
 
-> http://localhost:8080/candy
+> http://localhost:8080/candy/{id}
 
 ### DELETE : eliminar un caramelo
 
-> http://localhost:8080/candy
+> http://localhost:8080/candy/{id}
+
+
+## Consideraciones
+- Realice la prueba en forma local en Chrome
+- Para realizar el trabajo utilice Windows 7 y al ejecutar consola aparecia una advertencia, presionando continuar funciona correctamente
 
 
