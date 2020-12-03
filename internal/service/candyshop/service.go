@@ -1,6 +1,6 @@
 package candyshop //el package siempre es el nombre de la carpeta
 import (
-	"SeminarioGoLang/apiREST/internal/config"
+	"github.com/LucreLucero/SeminarioGoLang/internal/config"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -37,7 +37,7 @@ func (s service) FindByID(ID int) *CandyShopService { //tengo que nombrarlos en 
 }
 func (s service) FindAll() []*Candy {
 	var list []*Candy
-	if err := s.db.Select(&list, "SELECT * FROM candies"); err != nil{
+	if err := s.db.Select(&list, "SELECT * FROM candies"); err != nil {
 		panic(err)
 	}
 	return list
