@@ -19,7 +19,7 @@ func main() {
 	//fmt.Println(cfg.DB.Driver) //accedo a la configuracion
 	//fmt.Println(cfg.Version)
 
-	db, err := database.NewDataBase(cfg)//es mucho mas facil de leer - es la mejor opcion
+	db, err := database.NewDataBase(cfg) //es mucho mas facil de leer - es la mejor p
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
@@ -53,7 +53,7 @@ func readConfig() *config.Config {
 func createSchema(db *sqlx.DB) error {
 	schema := `CREATE TABLE IF NOT EXISTS candies(
 		id integer primary key autoincrement,
-		name varchar);`
+		text varchar);`
 
 	//execute a query on the server
 	_, err := db.Exec(schema)
@@ -62,7 +62,7 @@ func createSchema(db *sqlx.DB) error {
 	}
 
 	//or, you can use MustExec, which panics on error
-	insertCandy := `INSERT INTO candies (name) VALUES (?)`
+	insertCandy := `INSERT INTO candies (text) VALUES (?)`
 	s := fmt.Sprintf("Candy number %v", time.Now().Nanosecond())
 	db.MustExec(insertCandy, s)
 	return nil

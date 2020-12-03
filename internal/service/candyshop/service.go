@@ -11,10 +11,10 @@ type Candy struct {
 	Text string
 }
 
-//CandyShopService
-type CandyShopService interface { //para que una estructura implemente una interfaz
+//Service
+type Service interface { //para que una estructura implemente una interfaz
 	AddCandy(Candy) error //puedo usarlos como anonimos
-	FindByID(int) *CandyShopService
+	FindByID(int) *Service
 	FindAll() []*Candy
 }
 
@@ -24,7 +24,7 @@ type service struct { //no lo voy a exportar --esta en minuscula
 }
 
 //New
-func New(db *sqlx.DB, c *config.Config) (CandyShopService, error) {
+func New(db *sqlx.DB, c *config.Config) (Service, error) {
 	return service{db, c}, nil
 }
 
@@ -32,7 +32,7 @@ func (s service) AddCandy(c Candy) error {
 	return nil
 }
 
-func (s service) FindByID(ID int) *CandyShopService { //tengo que nombrarlos en las funciones
+func (s service) FindByID(ID int) *Service { //tengo que nombrarlos en las funciones
 	return nil
 }
 func (s service) FindAll() []*Candy {
